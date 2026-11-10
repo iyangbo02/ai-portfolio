@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="杨博的 AI 应用作品集。三个并列案例：企业询价流程 AI 改造、顺手取 Android 应用、青简俄语衍生版。">
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#f7f7f2">
+<title>杨博｜AI 应用作品集</title>
+<link rel="stylesheet" href="./style.css">
+<script src="./portfolio.js" defer></script>
+</head>
+<body id="top">
+<a class="skip" href="#projects">跳到作品</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="wordmark" href="#top"><span class="mark">杨</span><span>杨博<span class="wordmark-meta">作品集</span></span></a>
+    <nav aria-label="页面导航">
+      <a href="#projects">作品</a>
+      <a href="#about">关于我</a>
+      <a class="nav-link" href="https://github.com/iyangbo02">GitHub <span aria-hidden="true">↗</span></a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+  <section class="intro" aria-labelledby="main-title">
+    <p class="eyebrow"><span></span> 杨博 / 项目实践</p>
+    <h1 id="main-title">AI 应用与软件实践</h1>
+    <p class="intro-text">我关注怎样把实际需求做成可运行、可验证的功能。这里记录三项实践中的设计取舍、实现和验证过程。</p>
+  </section>
+
+  <section id="projects" aria-label="全部作品">
+    <div class="index">
+      <a class="index-item" href="#inquiry"><span class="index-type">企业实践 · 试用</span><strong>企业询价流程 AI 改造</strong><span>询价录入、缺项提示与人工复核 <span aria-hidden="true">↓</span></span></a>
+      <a class="index-item" href="#pickup"><span class="index-type">个人项目 · 公开试用版</span><strong>顺手取</strong><span>在手机上整理取件通知 <span aria-hidden="true">↓</span></span></a>
+      <a class="index-item" href="#qingjian"><span class="index-type">开源适配 · 本机验证</span><strong>青简俄语衍生版</strong><span>在中文输入时查看俄语释义 <span aria-hidden="true">↓</span></span></a>
+    </div>
+
+    <article class="project" id="inquiry" aria-labelledby="inquiry-title">
+      <header class="project-heading">
+        <p class="eyebrow">企业实践 <span class="dot" aria-hidden="true"></span> 试用阶段</p>
+        <h2 id="inquiry-title">企业询价流程 AI 改造</h2>
+        <p>把邮件里的规格、数量和交期提取到待审核询价单，供业务人员核对。</p>
+      </header>
+      <div class="project-body">
+        <dl class="project-facts">
+          <div><dt>问题</dt><dd>询价信息散在邮件正文中。录入前需要核对规格、数量和交期，缺项还要进一步确认。</dd></div>
+          <div><dt>我做了什么</dt><dd>在公司服务器上配置、调试 AI，接入已有询价录入流程，生成供业务人员审核的询价单。</dd></div>
+          <div><dt>怎么验证</dt><dd>用信息完整和缺项两类样例核对字段提取、缺项提示与人工复核，协助推进试用。</dd></div>
+        </dl>
+        <div class="exhibit demo" aria-label="询价样例演示">
+          <div class="exhibit-top"><span class="exhibit-label">询价录入样例</span><span class="chip">虚构数据</span></div>
+          <div class="segments" aria-label="切换询价样例">
+            <button type="button" data-scenario="complete" aria-pressed="true">信息完整</button>
+            <button type="button" data-scenario="missing" aria-pressed="false">信息缺项</button>
+          </div>
+          <div class="sample">
+            <p class="micro">输入邮件</p>
+            <p id="sample-email">您好，需要 50 台 380 V 电机，希望下月底交货。请提供报价。</p>
+          </div>
+          <div class="sample">
+            <p class="micro">提取后的待审询价单</p>
+            <dl class="fields">
+              <div><dt>规格</dt><dd id="sample-spec">电机 · 380 V</dd></div>
+              <div><dt>数量</dt><dd id="sample-qty">50 台</dd></div>
+              <div><dt>交期</dt><dd id="sample-date">下月底</dd></div>
+            </dl>
+          </div>
+          <div class="demo-result" id="sample-status" role="status"><span class="status-light" aria-hidden="true"></span><span id="sample-message">字段齐全，等待业务人员确认。</span></div>
+          <p class="exhibit-note">点击切换固定样例。演示仅展示流程逻辑。</p>
+          <noscript><p class="exhibit-note">缺项样例中，系统会把未填写的电压标为待确认，交由业务人员复核。</p></noscript>
+        </div>
+      </div>
+    </article>
+
+    <article class="project" id="pickup" aria-labelledby="pickup-title">
+      <header class="project-heading">
+        <p class="eyebrow">个人项目 <span class="dot" aria-hidden="true"></span> Android · v0.3.0</p>
+        <h2 id="pickup-title">顺手取</h2>
+        <p>把分散的取件提醒整理到一张清单，出门前就能看清要去哪里、取件码是什么。</p>
+      </header>
+      <div class="project-body">
+        <dl class="project-facts">
+          <div><dt>问题</dt><dd>取件信息散在不同应用的通知里。有的通知带取件码，有的只提示有包裹待取。</dd></div>
+          <div><dt>我做了什么</dt><dd>用 Codex 辅助迭代原生 Android 应用。按驿站分组，区分取件码和待取提醒，支持补录、标记已取和撤销。数据存放在本机。</dd></div>
+          <div><dt>怎么验证</dt><dd>发布 v0.3.0 签名试用包。该版本通过 49 组合成解析样本和 16 项本地数据库及界面测试。早期版本另有 Android 真机验证记录。</dd></div>
+        </dl>
+        <figure class="exhibit phones">
+          <div class="exhibit-top"><span class="exhibit-label">应用运行截图</span><span class="chip">合成取件信息</span></div>
+          <div class="phone-pair">
+            <div><img width="1440" height="3200" src="./assets/shunshouqu-pending.png" alt="顺手取应用按地点分组的待取清单" loading="lazy"><span>待取清单</span></div>
+            <div><img width="1440" height="3200" src="./assets/shunshouqu-picked.png" alt="顺手取应用已取记录与恢复入口" loading="lazy"><span>已取记录</span></div>
+          </div>
+        </figure>
+      </div>
+      <div class="actions" aria-label="顺手取相关链接">
+        <a href="https://github.com/iyangbo02/shunshouqu">源码 <span aria-hidden="true">↗</span></a>
+        <a href="https://github.com/iyangbo02/shunshouqu/releases/tag/v0.3.0">试用版 <span aria-hidden="true">↗</span></a>
+        <a href="https://github.com/iyangbo02/shunshouqu/blob/main/TEST_REPORT.md">测试记录 <span aria-hidden="true">↗</span></a>
+      </div>
+    </article>
+
+    <article class="project" id="qingjian" aria-labelledby="qingjian-title">
+      <header class="project-heading">
+        <p class="eyebrow">开源适配 <span class="dot" aria-hidden="true"></span> macOS 本机验证</p>
+        <h2 id="qingjian-title">青简俄语衍生版</h2>
+        <p>在中文输入法候选词旁增加俄语释义，让查词发生在输入过程中。</p>
+      </header>
+      <div class="project-body">
+        <dl class="project-facts">
+          <div><dt>问题</dt><dd>学习俄语时，输入中文和查俄语释义常要在不同窗口切换。</dd></div>
+          <div><dt>我做了什么</dt><dd>基于开源青简增加俄语释义、学习用重音和语言切换。编写大汉俄词典（БКРС）离线导入工具，记录词典重建步骤。</dd></div>
+          <div><dt>怎么验证</dt><dd>在 macOS 本机构建并验证。仓库内置 1,656 条学习词条。本机扩展词典导入生成 1,575,086 条合并释义词条。</dd></div>
+        </dl>
+        <figure class="exhibit dictionary">
+          <div class="exhibit-top"><span class="exhibit-label">输入候选词</span><span class="chip">界面示意</span></div>
+          <div class="dictionary-pair">
+            <div class="dictionary-card"><p class="micro">中文候选</p><p class="typed">shijian</p><p class="word">时间</p></div>
+            <div class="dictionary-card current"><p class="micro">加入俄语释义</p><p class="typed">shijian</p><p class="word">时间 <span lang="ru">вре́мя</span></p></div>
+          </div>
+          <p class="dict-label"><strong>1,656</strong> 条内置学习词条 <span>·</span> 本机可导入扩展词典</p>
+          <figcaption class="exhibit-note">基于上游青简的非官方衍生项目。全量第三方词典数据保存在本机。</figcaption>
+        </figure>
+      </div>
+      <div class="actions" aria-label="青简俄语衍生版相关链接">
+        <a href="https://github.com/iyangbo02/qingjian-russian">源码与构建说明 <span aria-hidden="true">↗</span></a>
+        <a href="https://github.com/iyangbo02/qingjian-russian/blob/main/docs/notes/russian-dictionaries.md">词典导入记录 <span aria-hidden="true">↗</span></a>
+        <a href="https://github.com/qingjian-team/qingjian">上游青简 <span aria-hidden="true">↗</span></a>
+      </div>
+    </article>
+  </section>
+
+  <section class="about" id="about">
+    <h2>关于我</h2>
+    <p>杨博，计算机科学与技术本科，莫斯科国立大学国际关系硕士在读，俄语 B2。做项目时，我习惯先写清使用场景和验收方式，再借助 AI 实现、测试和迭代。</p>
+    <a class="nav-link" href="https://github.com/iyangbo02">GitHub 主页 <span aria-hidden="true">↗</span></a>
+  </section>
+</main>
+<footer class="wrap footer"><span>杨博 · AI 应用作品集</span><a href="#top">返回顶部 <span aria-hidden="true">↑</span></a></footer>
+</body>
+</html>
